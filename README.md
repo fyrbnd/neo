@@ -9,4 +9,7 @@ Library for working with graphs in C. Work in progress.
 
 ## use
 
-Just #include it. Detailed description of what functions exist and how to use them will be added once the code is mostly done.
+No makefile as of now, so:
+
+* download neo.c into the directory of your project
+* #include "neo.c"
