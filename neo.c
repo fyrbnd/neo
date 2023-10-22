@@ -1,79 +1,82 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+typedef unsigned char uchar;
+typedef unsigned int uint;
+typedef unsigned long ulong;
 
 typedef struct graph graph;
 typedef struct node node;
-typedef unsigned int uint;
 
 struct graph {
-    struct node* nodes;
-    uint width;
+    uint numNodes;
+    node* nodes;
     int** matrix;
 };
 
 struct node {
     char* name;
-    int value;
 };
 
-int graph_init(graph* graph, uint width) {
-    graph->width = width;
+int initGraph(graph* graph, uint numNodes) {
+    graph->numNodes = numNodes;
 
-    graph->matrix = malloc(width * sizeof(int*));
-    graph->nodes = malloc(width * sizeof(struct node));
-    
-    if (graph->matrix == NULL || graph->nodes == NULL) return 1;
-    
-    for (int i = 0; i < width; ++i) {
-        graph->matrix[i] = malloc(width * sizeof(int));
-        if (graph->matrix[i] == NULL) return 1;
+    graph->matrix = malloc(numNodes * sizeof(int*));
+    graph->nodes = malloc(numNodes * sizeof(node));
+    if (graph->nodes == NULL || graph->matrix == NULL) return -1;
 
-        for (int k = 0; k < width; ++k) {
+    for (uint i = 0; i < numNodes; ++i) {
+        graph->matrix[i] = malloc(numNodes * sizeof(int));
+        if (graph->matrix[i] == NULL) return -1;
+
+        for (uint k = 0; k < numNodes; ++k) {
             graph->matrix[i][k] = i == k ? 0 : -1;
         }
     }
+
+    return 0;
+}
+
+int setEdge(graph* graph, uint from, uint to, int value) {
+    if (graph == NULL ||
+        graph->matrix == NULL || 
+        graph->matrix[from] == NULL
+    ) return -1;
+
+    graph->matrix[from][to] = value;
     return 0;
 }
 
-void print_matrix(FILE* stream, graph graph) {
-    for (int i = 0; i < graph.width; ++i) {
-        for (int k = 0; k < graph.width; ++k) {
-            fprintf(stream, "%4d ", graph.matrix[i][k]);
-        }
-        putc('\n', stream);
-    }
-}
-
-void modify_edge(graph graph, int from, int to, int value) {
-    graph.matrix[from][to] = value;
-}
-
-void modify_edge_undir(graph graph, int from, int to, int value) {
-    modify_edge(graph, from, to, value);
-    modify_edge(graph, to, from, value); 
-}
-
-/*void modify_name(node node, const char* name){
-    if (node.name == NULL) {
-        node.name = calloc(
-    }
-}*/
-
-void print_error(void) {
-    fputs("?\n", stderr);
-}
-
-int main(void) {
-
-    struct graph graph1;
-
-    if(graph_init(&graph1, 4)) return 1;
-    print_matrix(stdout, graph1);
-    putchar('\n');
-
-    modify_edge_undir(graph1, 1, 3, 2);
-    print_matrix(stdout, graph1);
-    
+int setEdgeUndir(graph* graph, int from, int to, int value) {
+    if (setEdge(graph, from, to, value) ||
+        setEdge(graph, to, from, value)
+    ) return -1;
 
     return 0;
+}
+
+int renameNode(graph* graph, uint index, const char* newName) {
+    if (graph->nodes == NULL) return -1;
+
+    if(graph->nodes[index].name != NULL) free(graph->nodes[index].name);
+
+    graph->nodes[index].name = malloc((strlen(newName) + 1) * sizeof(char));
+    if(graph->nodes[index].name == NULL) return -1;
+
+    if (strcpy(graph->nodes[index].name, newName) == NULL) return -1;
+    return 0;
+}
+
+int getNodeIndexByName(graph graph, const char* searchName) {
+    for (uint i = 0; i < graph.numNodes; ++i) {
+        if (!strcmp(graph.nodes[i].name, searchName)) return i;
+    }
+
+    return -1;
+}
+
+char* getNodeName(graph graph, uint index) {
+    if (index < graph.numNodes) return graph.nodes[index].name;
+    return NULL;
 }
