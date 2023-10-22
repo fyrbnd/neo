@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "neo.c"
 
+/*This file is for testing functions. Functions which are known to work go straight into neo.c.*/
+
 typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
