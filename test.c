@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "neo.c"
+#include "neo.h"
 
-/*Random useless program used for testing our library.*/
+/*Random non-useless program used for testing our library.*/
 
 typedef unsigned char uchar;
 typedef unsigned int uint;
@@ -42,9 +42,9 @@ void printNodes(FILE* stream, graph graph, const char* prefix) {
 
 void printGraphState(graph graph) {
     puts("  -> current graph state:\n    - nodes:");
-    printNodes(stdout, graph, "      ");
+    printNodes(stdout, graph, "        ");
     puts("    - matrix:");
-    printMatrix(stdout, graph, "      ");
+    printMatrix(stdout, graph, "        ");
 }
 
 int test(void) {
@@ -73,10 +73,12 @@ int test(void) {
     printNodes(stdout, testgraph, "      ");
 
     puts(":: test 3: setting edges");
-    if (setEdge(&testgraph, 1, 2, 1) ||
-        setEdge(&testgraph, 2, 3, 69420) ||
+    if (setEdgeUndir(&testgraph, 0, 1, 1) ||
+        setEdge(&testgraph, 0, 3, -30) ||
+        setEdge(&testgraph, 1, 2, 1) ||
         setEdgeUndir(&testgraph, 1, 3, 3) ||
-        setEdge(&testgraph, 0, 3, -30)
+        setEdge(&testgraph, 2, 0, 42) ||
+        setEdge(&testgraph, 2, 3, 69420)
     ) return -1;
     puts("  -> test 3 successful");
     puts("  -> current matrix:");
@@ -84,6 +86,7 @@ int test(void) {
 
     /* add more tests */
 
+    puts(":: all tests successful");
     return 0;
 }
 

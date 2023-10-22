@@ -2,22 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef unsigned char uchar;
-typedef unsigned int uint;
-typedef unsigned long ulong;
-
-typedef struct graph graph;
-typedef struct node node;
-
-struct graph {
-    uint numNodes;
-    node* nodes;
-    int** matrix;
-};
-
-struct node {
-    char* name;
-};
+#include "neo.h"
 
 int initGraph(graph* graph, uint numNodes) {
     graph->numNodes = numNodes;

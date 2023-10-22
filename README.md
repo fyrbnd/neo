@@ -11,5 +11,7 @@ Library for working with graphs in C. Work in progress.
 
 No makefile as of now, so:
 
-* download neo.c into the directory of your project
-* #include "neo.c"
+* download neo.h and neo.c into the directory of your project
+* ```c
+  #include "neo.h"
+  ```
