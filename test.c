@@ -93,6 +93,10 @@ int test(void) {
 int main(void) {
     if (test()) {
         fputs("\033[41m?\033[0m\n", stderr);
+        /* why the everliving fuck does puts append a fucking newline but fputs
+           doesn't it's literally the exact same fucking thing except that the
+           fucking file stream is predefined as fucking stdout this makes me so
+           fucking angry why the fuck did they do this */
         return -1;
     }
 
