@@ -84,6 +84,11 @@ int test(void) {
     puts("  -> current matrix:");
     printMatrix(stdout, testgraph, "    ");
 
+    puts(":: test 4: get node index");
+    printf("  -> index of node \"nodeD\": %d", getNodeIndexByName(testgraph, "nodeD"));
+    printf("  -> index of node \"thisIsNotAValidNodeName\": %d", getNodeIndexByName(testgraph, "thisIsNotAValidNodeName"));
+    puts("  -> test 4 successful");
+
     /* add more tests */
 
     puts(":: all tests successful");

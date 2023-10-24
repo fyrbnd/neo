@@ -55,7 +55,7 @@ int renameNode(graph* graph, uint index, const char* newName) {
 
 int getNodeIndexByName(graph graph, const char* searchName) {
     for (uint i = 0; i < graph.numNodes; ++i) {
-        if (!strcmp(graph.nodes[i].name, searchName)) return i;
+        if (graph.nodes[i].name != NULL && !strcmp(graph.nodes[i].name, searchName)) return i;
     }
 
     return -1;
