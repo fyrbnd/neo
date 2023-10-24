@@ -20,7 +20,7 @@ struct node {
 
 int initGraph(graph* graph, uint numNodes);
 int setEdge(graph* graph, uint from, uint to, int value);
-int setEdgeUndir(graph* graph, int from, int to, int value);
+int setEdgeND(graph* graph, int from, int to, int value);
 int renameNode(graph* graph, uint index, const char* newName);
 int getNodeIndexByName(graph graph, const char* name);
 char* getNodeName(graph graph, uint index);

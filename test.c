@@ -73,10 +73,10 @@ int test(void) {
     printNodes(stdout, testgraph, "      ");
 
     puts(":: test 3: setting edges");
-    if (setEdgeUndir(&testgraph, 0, 1, 1) ||
+    if (setEdgeND(&testgraph, 0, 1, 1) ||
         setEdge(&testgraph, 0, 3, -30) ||
         setEdge(&testgraph, 1, 2, 1) ||
-        setEdgeUndir(&testgraph, 1, 3, 3) ||
+        setEdgeND(&testgraph, 1, 3, 3) ||
         setEdge(&testgraph, 2, 0, 42) ||
         setEdge(&testgraph, 2, 3, 69420)
     ) return -1;
@@ -92,11 +92,7 @@ int test(void) {
 
 int main(void) {
     if (test()) {
-        fputs("\033[41m?\033[0m\n", stderr);
-        /* why the everliving fuck does puts append a fucking newline but fputs
-           doesn't it's literally the exact same fucking thing except that the
-           fucking file stream is predefined as fucking stdout this makes me so
-           fucking angry why the fuck did they do this */
+        fputs("\033[41m?\033[0m\n", stderr); /* why the everliving fuck does puts append a fucking newline but fputs doesn't it's literally the exact same fucking thing except that the fucking file stream is predefined as fucking stdout this makes me so fucking angry why the fuck did they do this */
         return -1;
     }
 

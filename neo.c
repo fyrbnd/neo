@@ -33,7 +33,7 @@ int setEdge(graph* graph, uint from, uint to, int value) {
     return 0;
 }
 
-int setEdgeUndir(graph* graph, int from, int to, int value) {
+int setEdgeND(graph* graph, int from, int to, int value) {
     if (setEdge(graph, from, to, value) ||
         setEdge(graph, to, from, value)
     ) return -1;
