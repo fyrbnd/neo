@@ -18,11 +18,13 @@ struct node {
     char* name;
 };
 
-int initGraph(graph* graph, uint numNodes);
-int setEdge(graph* graph, uint from, uint to, int value);
-int setEdgeND(graph* graph, int from, int to, int value);
-int renameNode(graph* graph, uint index, const char* newName);
-int getNodeIndexByName(graph graph, const char* name);
-char* getNodeName(graph graph, uint index);
+int initGraph(graph* g, uint numNodes);
+
+int setEdge(graph* g, uint from, uint to, int value);
+int setEdgeND(graph* g, int from, int to, int value);
+int renameNode(graph* g, uint index, const char* newName);
+
+int getNodeIndexByName(graph g, const char* name);
+char* getNodeName(graph g, uint index);
 
 #endif /*NEO_GRAPH_H_*/
