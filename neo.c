@@ -4,7 +4,7 @@
 
 #include "neo.h"
 
-int initg(graph* g, uint numNodes) {
+int initGraph(graph* g, uint numNodes) {
     g->numNodes = numNodes;
 
     g->matrix = malloc(numNodes * sizeof(int*));
