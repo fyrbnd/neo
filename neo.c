@@ -47,15 +47,18 @@ int setEdge(graph* g, uint from, uint to, int value) {
 }
 
 int setEdgeND(graph* g, int from, int to, int value) {
-    if (setEdge(g, from, to, value) ||
-        setEdge(g, to, from, value)
+    if (g == NULL ||
+        g->matrix == NULL ||
+        g->matrix[from] == NULL
     ) return -1;
 
+    g->matrix[from][to] = value;
+    g->matrix[to][from] = value;
     return 0;
 }
 
 int renameNode(graph* g, uint index, const char* newName) {
-    if (g->nodes == NULL) return -1;
+    if (g == NULL || g->nodes == NULL) return -1;
 
     if(g->nodes[index].name != NULL) free(g->nodes[index].name);
 
