@@ -65,3 +65,13 @@ char* getNodeName(graph g, uint index) {
     if (index < g.numNodes) return g.nodes[index].name;
     return NULL;
 }
+
+int isDirected(graph g) {
+    for (uint i = 0; i < g.numNodes; ++i) {
+        for (uint k = 0; k < 1; ++k) {
+            if (g.matrix[i][k] != g.matrix[k][i]) return 0;
+        }
+    }
+
+    return 1;
+}

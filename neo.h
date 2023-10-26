@@ -35,4 +35,10 @@ char* getNodeName(graph g, uint index);
 
 path shortestPath(graph g, uint from, uint to);
 
+int isDirected(graph g);
+/*int isConnected(graph g);
+int isPlanar(graph g);
+int isCyclic(graph g);
+int isChordal(graph g);*/
+
 #endif /*NEO_GRAPH_H_*/
