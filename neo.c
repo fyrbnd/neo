@@ -23,9 +23,22 @@ int initGraph(graph* g, uint numNodes) {
     return 0;
 }
 
+int checkGraph(graph g) {
+    if (g.nodes == NULL ||
+        g.matrix == NULL ||
+        g.numNodes == 0
+    ) return -1;
+
+    for (int i = 0; i < g.numNodes; ++i) {
+        if (g.matrix[i] == NULL) return -1;
+    }
+
+    return 0;
+}
+
 int setEdge(graph* g, uint from, uint to, int value) {
     if (g == NULL ||
-        g->matrix == NULL || 
+        g->matrix == NULL ||
         g->matrix[from] == NULL
     ) return -1;
 

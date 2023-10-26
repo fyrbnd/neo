@@ -19,6 +19,7 @@ struct node {
 };
 
 int initGraph(graph* g, uint numNodes);
+int checkGraph(graph g);
 
 int setEdge(graph* g, uint from, uint to, int value);
 int setEdgeND(graph* g, int from, int to, int value);
