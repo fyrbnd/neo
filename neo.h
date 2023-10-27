@@ -1,7 +1,3 @@
-#ifndef NEO_GRAPH_H_
-#define NEO_GRAPH_H_
-
-
 /*===------------ neo - Library for Working With Graphs in C ------------===*\
 |*                                                                          *|
 |* This file is part of Neo.                                                *|
@@ -21,6 +17,8 @@
 |*                                                                          *|
 \*===--------------------------------------------------------------------===*/
 
+#ifndef NEO_GRAPH_H_
+#define NEO_GRAPH_H_
 
 typedef unsigned char uchar;
 typedef unsigned int uint;
