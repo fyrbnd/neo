@@ -25,7 +25,7 @@ int initGraph(graph* g, uint numVerts) {
 
 int setEdge(graph* g, uint from, uint to, int value) {
     if (g == NULL ||
-        g->matrix == NULL || 
+        g->matrix == NULL ||
         g->matrix[from] == NULL
     ) return -1;
 

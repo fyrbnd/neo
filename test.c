@@ -14,7 +14,7 @@ uint decLen(int n) {
 
 void printMatrix(FILE* stream, graph graph, const char* prefix) {
     uint lenM = 1;
-    
+
     for (uint i = 0; i < graph.numVerts; ++i) {
         for (uint k = 0; k < graph.numVerts; ++k) {
             uint lenC = decLen(graph.matrix[i][k]);
@@ -50,7 +50,7 @@ void printGraphState(graph graph) {
 int test(void) {
     int size = 4;
     graph testgraph;
-    
+
     puts(":: test begin");
     puts("  -> initializing graph");
     if (initGraph(&testgraph, size)) return -1;
