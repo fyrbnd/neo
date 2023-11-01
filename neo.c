@@ -23,18 +23,18 @@
 
 #include "neo.h"
 
-int initGraph(graph* g, uint numNodes) {
-    g->numNodes = numNodes;
+int initGraph(graph* g, uint numVerts) {
+    g->numVerts = numVerts;
 
-    g->matrix = malloc(numNodes * sizeof(int*));
-    g->nodes = malloc(numNodes * sizeof(node));
-    if (g->nodes == NULL || g->matrix == NULL) return -1;
+    g->matrix = malloc(numVerts * sizeof(int*));
+    g->vertices = malloc(numVerts * sizeof(vertex));
+    if (g->vertices == NULL || g->matrix == NULL) return -1;
 
-    for (uint i = 0; i < numNodes; ++i) {
-        g->matrix[i] = malloc(numNodes * sizeof(int));
+    for (uint i = 0; i < numVerts; ++i) {
+        g->matrix[i] = malloc(numVerts * sizeof(int));
         if (g->matrix[i] == NULL) return -1;
 
-        for (uint k = 0; k < numNodes; ++k) {
+        for (uint k = 0; k < numVerts; ++k) {
             g->matrix[i][k] = i == k ? 0 : -1;
         }
     }
@@ -43,12 +43,12 @@ int initGraph(graph* g, uint numNodes) {
 }
 
 int checkGraph(graph g) {
-    if (g.nodes == NULL ||
+    if (g.vertices == NULL ||
         g.matrix == NULL ||
-        g.numNodes == 0
+        g.numVerts == 0
     ) return -1;
 
-    for (int i = 0; i < g.numNodes; ++i) {
+    for (int i = 0; i < g.numVerts; ++i) {
         if (g.matrix[i] == NULL) return -1;
     }
 
@@ -76,27 +76,27 @@ int setEdgeND(graph* g, int from, int to, int value) {
     return 0;
 }
 
-int renameNode(graph* g, uint index, const char* newName) {
-    if (g == NULL || g->nodes == NULL) return -1;
+int renameVertex(graph* g, uint index, const char* newName) {
+    if (g == NULL || g->vertices == NULL) return -1;
 
-    if(g->nodes[index].name != NULL) free(g->nodes[index].name);
+    if(g->vertices[index].name != NULL) free(g->vertices[index].name);
 
-    g->nodes[index].name = malloc((strlen(newName) + 1) * sizeof(char));
-    if(g->nodes[index].name == NULL) return -1;
+    g->vertices[index].name = malloc((strlen(newName) + 1) * sizeof(char));
+    if(g->vertices[index].name == NULL) return -1;
 
-    if (strcpy(g->nodes[index].name, newName) == NULL) return -1;
+    if (strcpy(g->vertices[index].name, newName) == NULL) return -1;
     return 0;
 }
 
-int getNodeIndexByName(graph g, const char* searchName) {
-    for (uint i = 0; i < g.numNodes; ++i) {
-        if (g.nodes[i].name != NULL && !strcmp(g.nodes[i].name, searchName)) return i;
+int getVertIndexByName(graph g, const char* searchName) {
+    for (uint i = 0; i < g.numVerts; ++i) {
+        if (g.vertices[i].name != NULL && !strcmp(g.vertices[i].name, searchName)) return i;
     }
 
     return -1;
 }
 
-char* getNodeName(graph g, uint index) {
-    if (index < g.numNodes) return g.nodes[index].name;
+char* getVertexName(graph g, uint index) {
+    if (index < g.numVerts) return g.vertices[index].name;
     return NULL;
 }
