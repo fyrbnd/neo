@@ -34,6 +34,7 @@ int getVertIndexByName(graph g, const char* name);
 char* getVertexName(graph g, uint index);
 
 path shortestPath(graph g, uint from, uint to);
+path* allPaths(graph g, uint from, uint to);
 
 int isDirected(graph g);
 /*int isConnected(graph g);
