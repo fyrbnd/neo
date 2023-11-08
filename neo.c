@@ -1,3 +1,22 @@
+/*===------------ neo - Library for Working With Graphs in C ------------===*\
+|*                                                                          *|
+|* This file is part of Neo.                                                *|
+|*                                                                          *|
+|* Neo is free software: you can redistribute it and/or modify it under the *|
+|* terms of the GNU Lesser General Public License as published by the Free  *|
+|* Software Foundation, version 2.1 of the License, or (at your option) any *|
+|* later version.                                                           *|
+|*                                                                          *|
+|* Neo is distributed in the hope that it will be useful, but WITHOUT ANY   *|
+|* WARRANTY; without even the implied warranty of MERCHANTABILITY or        *|
+|* FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public      *|
+|* License for more details.                                                *|
+|*                                                                          *|
+|* You should have received a copy of the GNU Lesser General Public License *|
+|* along with Neo. If not, see <https://www.gnu.org/licenses/>.             *|
+|*                                                                          *|
+\*===--------------------------------------------------------------------===*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -23,6 +42,19 @@ int initGraph(graph* g, uint numVerts) {
     return 0;
 }
 
+int checkGraph(graph g) {
+    if (g.vertices == NULL ||
+        g.matrix == NULL ||
+        g.numVerts == 0
+    ) return -1;
+
+    for (int i = 0; i < g.numVerts; ++i) {
+        if (g.matrix[i] == NULL) return -1;
+    }
+
+    return 0;
+}
+
 int setEdge(graph* g, uint from, uint to, int value) {
     if (g == NULL ||
         g->matrix == NULL ||
@@ -34,15 +66,19 @@ int setEdge(graph* g, uint from, uint to, int value) {
 }
 
 int setEdgeND(graph* g, int from, int to, int value) {
-    if (setEdge(g, from, to, value) ||
-        setEdge(g, to, from, value)
+    if (g == NULL ||
+        g->matrix == NULL ||
+        g->matrix[from] == NULL
     ) return -1;
 
+    g->matrix[from][to] = value;
+    g->matrix[to][from] = value;
     return 0;
 }
 
 int renameVertex(graph* g, uint index, const char* newName) {
-    if (g->vertices == NULL) return -1;
+    if (g == NULL || g->vertices == NULL) return -1;
+
 
     if(g->vertices[index].name != NULL) free(g->vertices[index].name);
 
