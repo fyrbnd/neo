@@ -13,7 +13,7 @@ uint dec_len(int n)
     return dec_len(n / 10) + 1;
 }
 
-void print_matrix(FILE* stream, graph graph, const char* prefix)
+void print_matrix(FILE* stream, graph_t graph, const char* prefix)
 {
     uint lenM = 1;
 
@@ -35,7 +35,7 @@ void print_matrix(FILE* stream, graph graph, const char* prefix)
     return;
 }
 
-void print_vertices(FILE* stream, graph graph, const char* prefix)
+void print_vertices(FILE* stream, graph_t graph, const char* prefix)
 
 {
     for (uint i = 0; i < graph.num_verts; ++i) {
@@ -44,7 +44,7 @@ void print_vertices(FILE* stream, graph graph, const char* prefix)
     }
 }
 
-void print_graph_state(graph graph)
+void print_graph_state(graph_t graph)
 {
     puts("  -> current graph state:\n    - vertices:");
     print_vertices(stdout, graph, "        ");
@@ -55,7 +55,7 @@ void print_graph_state(graph graph)
 int test(void)
 {
     int size = 4;
-    graph testgraph;
+    graph_t testgraph;
 
     puts(":: test begin");
     puts("  -> initializing graph");

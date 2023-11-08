@@ -24,14 +24,14 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
-typedef struct graph graph;
-typedef struct vertex vertex;
-typedef struct path path;
+typedef struct graph graph_t;
+typedef struct vertex vertex_t;
+typedef struct path path_t;
 
 
 struct graph {
     uint num_verts;
-    vertex* vertices;
+    vertex_t* vertices;
     int** matrix;
 };
 
@@ -44,19 +44,19 @@ struct path {
     uint* vertices;
 };
 
-int init_graph(graph* g, uint num_verts);
-int check_graph(graph g);
+int init_graph(graph_t* g, uint num_verts);
+int check_graph(graph_t g);
 
-int set_edge(graph* g, uint from, uint to, int value);
-int set_edge_nd(graph* g, int from, int to, int value);
-int rename_vertex(graph* g, uint index, const char* new_name);
+int set_edge(graph_t* g, uint from, uint to, int value);
+int set_edge_nd(graph_t* g, int from, int to, int value);
+int rename_vertex(graph_t* g, uint index, const char* new_name);
 
-int get_vert_index_by_name(graph g, const char* name);
+int get_vert_index_by_name(graph_t g, const char* name);
 
-path shortest_path(graph g, uint from, uint to); /*TODO*/
-path* all_paths(graph g, uint from, uint to); /*TODO*/
+path_t shortest_path(graph_t g, uint from, uint to); /*TODO*/
+path_t* all_paths(graph_t g, uint from, uint to); /*TODO*/
 
-int is_directed(graph g);
+int is_directed(graph_t g);
 /*int is_connected(graph g);
 int is_planar(graph g);
 int is_cyclic(graph g);
