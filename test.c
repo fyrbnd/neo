@@ -7,12 +7,14 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
-uint decLen(int n) {
+uint decLen(int n)
+{
     if (!(n / 10)) return n < 0 ? 2 : 1;
     return decLen(n / 10) + 1;
 }
 
-void printMatrix(FILE* stream, graph graph, const char* prefix) {
+void printMatrix(FILE* stream, graph graph, const char* prefix)
+{
     uint lenM = 1;
 
     for (uint i = 0; i < graph.numVerts; ++i) {
@@ -33,21 +35,25 @@ void printMatrix(FILE* stream, graph graph, const char* prefix) {
     return;
 }
 
-void printVertices(FILE* stream, graph graph, const char* prefix) {
+void printVertices(FILE* stream, graph graph, const char* prefix)
+
+{
     for (uint i = 0; i < graph.numVerts; ++i) {
         /*fprintf(stream, "%svertex %-2i: %s\n", prefix, i, graph.vertices[i].name);*/
         fprintf(stream, "%svertex %*d: %s\n", prefix, decLen(graph.numVerts), i, getVertexName(graph, i));
     }
 }
 
-void printGraphState(graph graph) {
+void printGraphState(graph graph)
+{
     puts("  -> current graph state:\n    - vertices:");
     printVertices(stdout, graph, "        ");
     puts("    - matrix:");
     printMatrix(stdout, graph, "        ");
 }
 
-int test(void) {
+int test(void)
+{
     int size = 4;
     graph testgraph;
 
