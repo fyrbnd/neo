@@ -79,6 +79,7 @@ int setEdgeND(graph* g, int from, int to, int value) {
 int renameVertex(graph* g, uint index, const char* newName) {
     if (g == NULL || g->vertices == NULL) return -1;
 
+
     if(g->vertices[index].name != NULL) free(g->vertices[index].name);
 
     g->vertices[index].name = malloc((strlen(newName) + 1) * sizeof(char));
@@ -99,4 +100,14 @@ int getVertIndexByName(graph g, const char* searchName) {
 char* getVertexName(graph g, uint index) {
     if (index < g.numVerts) return g.vertices[index].name;
     return NULL;
+}
+
+int isDirected(graph g) {
+    for (uint i = 0; i < g.numVerts; ++i) {
+        for (uint k = 0; k < 1; ++k) {
+            if (g.matrix[i][k] != g.matrix[k][i]) return 0;
+        }
+    }
+
+    return 1;
 }

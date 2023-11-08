@@ -26,6 +26,8 @@ typedef unsigned long ulong;
 
 typedef struct graph graph;
 typedef struct vertex vertex;
+typedef struct path path;
+
 
 struct graph {
     uint numVerts;
@@ -37,6 +39,11 @@ struct vertex {
     char* name;
 };
 
+struct path {
+    uint length;
+    uint* vertices;
+};
+
 int initGraph(graph* g, uint numVerts);
 int checkGraph(graph g);
 
@@ -46,5 +53,14 @@ int renameVertex(graph* g, uint index, const char* newName);
 
 int getVertIndexByName(graph g, const char* name);
 char* getVertexName(graph g, uint index);
+
+path shortestPath(graph g, uint from, uint to);
+path* allPaths(graph g, uint from, uint to);
+
+int isDirected(graph g);
+/*int isConnected(graph g);
+int isPlanar(graph g);
+int isCyclic(graph g);
+int isChordal(graph g);*/
 
 #endif /*NEO_GRAPH_H_*/
