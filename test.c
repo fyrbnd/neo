@@ -7,24 +7,26 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
-uint decLen(int n) {
+uint dec_len(int n)
+{
     if (!(n / 10)) return n < 0 ? 2 : 1;
-    return decLen(n / 10) + 1;
+    return dec_len(n / 10) + 1;
 }
 
-void printMatrix(FILE* stream, graph graph, const char* prefix) {
+void print_matrix(FILE* stream, graph_t graph, const char* prefix)
+{
     uint lenM = 1;
 
-    for (uint i = 0; i < graph.numVerts; ++i) {
-        for (uint k = 0; k < graph.numVerts; ++k) {
-            uint lenC = decLen(graph.matrix[i][k]);
+    for (uint i = 0; i < graph.num_verts; ++i) {
+        for (uint k = 0; k < graph.num_verts; ++k) {
+            uint lenC = dec_len(graph.matrix[i][k]);
             if (lenC > lenM) lenM = lenC;
         }
     }
 
-    for (uint i = 0; i < graph.numVerts; ++i) {
+    for (uint i = 0; i < graph.num_verts; ++i) {
         fprintf(stream, "%s", prefix);
-        for (uint k = 0; k < graph.numVerts; ++k) {
+        for (uint k = 0; k < graph.num_verts; ++k) {
             fprintf(stream, "%*d ", lenM, graph.matrix[i][k]);
         }
         fputc('\n', stream);
@@ -33,60 +35,64 @@ void printMatrix(FILE* stream, graph graph, const char* prefix) {
     return;
 }
 
-void printVertices(FILE* stream, graph graph, const char* prefix) {
-    for (uint i = 0; i < graph.numVerts; ++i) {
+void print_vertices(FILE* stream, graph_t graph, const char* prefix)
+
+{
+    for (uint i = 0; i < graph.num_verts; ++i) {
         /*fprintf(stream, "%svertex %-2i: %s\n", prefix, i, graph.vertices[i].name);*/
-        fprintf(stream, "%svertex %*d: %s\n", prefix, decLen(graph.numVerts), i, getVertexName(graph, i));
+        fprintf(stream, "%svertex %*d: %s\n", prefix, dec_len(graph.num_verts), i, graph.vertices[i].name);
     }
 }
 
-void printGraphState(graph graph) {
+void print_graph_state(graph_t graph)
+{
     puts("  -> current graph state:\n    - vertices:");
-    printVertices(stdout, graph, "        ");
+    print_vertices(stdout, graph, "        ");
     puts("    - matrix:");
-    printMatrix(stdout, graph, "        ");
+    print_matrix(stdout, graph, "        ");
 }
 
-int test(void) {
+int test(void)
+{
     int size = 4;
-    graph testgraph;
+    graph_t testgraph;
 
     puts(":: test begin");
     puts("  -> initializing graph");
-    if (initGraph(&testgraph, size)) return -1;
+    if (init_graph(&testgraph, size)) return -1;
     puts("  -> init successful");
-    printGraphState(testgraph);
+    print_graph_state(testgraph);
 
     puts(":: test 1: setting vertex names");
-    if (renameVertex(&testgraph, 0, "vertexA") ||
-        renameVertex(&testgraph, 1, "vertexB") ||
-        renameVertex(&testgraph, 3, "vertexD")
+    if (rename_vertex(&testgraph, 0, "vertexA") ||
+        rename_vertex(&testgraph, 1, "vertexB") ||
+        rename_vertex(&testgraph, 3, "vertexD")
     ) return -1;
     puts("  -> test 1 successful");
     puts("  -> current vertex list:");
-    printVertices(stdout, testgraph, "      ");
+    print_vertices(stdout, testgraph, "      ");
 
     puts(":: test 2: renaming vertex");
-    if (renameVertex(&testgraph, 1, "vertexB-nameIsLongerThanBefore")) return -1;
+    if (rename_vertex(&testgraph, 1, "vertexB-nameIsLongerThanBefore")) return -1;
     puts("  -> test 2 successful");
     puts("  -> current vertex list:");
-    printVertices(stdout, testgraph, "      ");
+    print_vertices(stdout, testgraph, "      ");
 
     puts(":: test 3: setting edges");
-    if (setEdgeND(&testgraph, 0, 1, 1) ||
-        setEdge(&testgraph, 0, 3, -30) ||
-        setEdge(&testgraph, 1, 2, 1) ||
-        setEdgeND(&testgraph, 1, 3, 3) ||
-        setEdge(&testgraph, 2, 0, 42) ||
-        setEdge(&testgraph, 2, 3, 69420)
+    if (set_edge_nd(&testgraph, 0, 1, 1) ||
+        set_edge(&testgraph, 0, 3, -30) ||
+        set_edge(&testgraph, 1, 2, 1) ||
+        set_edge_nd(&testgraph, 1, 3, 3) ||
+        set_edge(&testgraph, 2, 0, 42) ||
+        set_edge(&testgraph, 2, 3, 69420)
     ) return -1;
     puts("  -> test 3 successful");
     puts("  -> current matrix:");
-    printMatrix(stdout, testgraph, "    ");
+    print_matrix(stdout, testgraph, "    ");
 
     puts(":: test 4: get vertex index");
-    printf("  -> index of vertex \"vertexD\": %d", getVertIndexByName(testgraph, "vertexD"));
-    printf("  -> index of vertex \"thisIsNotAValidVertexName\": %d", getVertIndexByName(testgraph, "thisIsNotAValidVertexName"));
+    printf("  -> index of vertex \"vertexD\": %d", get_vert_index_by_name(testgraph, "vertexD"));
+    printf("  -> index of vertex \"thisIsNotAValid_vertex_name\": %d", get_vert_index_by_name(testgraph, "thisIsNotAValid_vertex_name"));
     puts("  -> test 4 successful");
 
     /* add more tests */

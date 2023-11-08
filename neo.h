@@ -1,4 +1,4 @@
-/*===------------ neo - Library for Working With Graphs in C ------------===*\
+/*===------------ neo - Library for Working With graphs in C ------------===*\
 |*                                                                          *|
 |* This file is part of Neo.                                                *|
 |*                                                                          *|
@@ -24,14 +24,14 @@ typedef unsigned char uchar;
 typedef unsigned int uint;
 typedef unsigned long ulong;
 
-typedef struct graph graph;
-typedef struct vertex vertex;
-typedef struct path path;
+typedef struct graph graph_t;
+typedef struct vertex vertex_t;
+typedef struct path path_t;
 
 
 struct graph {
-    uint numVerts;
-    vertex* vertices;
+    uint num_verts;
+    vertex_t* vertices;
     int** matrix;
 };
 
@@ -44,23 +44,22 @@ struct path {
     uint* vertices;
 };
 
-int initGraph(graph* g, uint numVerts);
-int checkGraph(graph g);
+int init_graph(graph_t* g, uint num_verts);
+int check_graph(graph_t g);
 
-int setEdge(graph* g, uint from, uint to, int value);
-int setEdgeND(graph* g, int from, int to, int value);
-int renameVertex(graph* g, uint index, const char* newName);
+int set_edge(graph_t* g, uint from, uint to, int value);
+int set_edge_nd(graph_t* g, int from, int to, int value);
+int rename_vertex(graph_t* g, uint index, const char* new_name);
 
-int getVertIndexByName(graph g, const char* name);
-char* getVertexName(graph g, uint index);
+int get_vert_index_by_name(graph_t g, const char* name);
 
-path shortestPath(graph g, uint from, uint to);
-path* allPaths(graph g, uint from, uint to);
+path_t shortest_path(graph_t g, uint from, uint to); /*TODO*/
+path_t* all_paths(graph_t g, uint from, uint to); /*TODO*/
 
-int isDirected(graph g);
-/*int isConnected(graph g);
-int isPlanar(graph g);
-int isCyclic(graph g);
-int isChordal(graph g);*/
+int is_directed(graph_t g);
+/*int is_connected(graph g);
+int is_planar(graph g);
+int is_cyclic(graph g);
+int is_chordal(graph g);*/
 
 #endif /*NEO_GRAPH_H_*/
