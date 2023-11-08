@@ -23,7 +23,8 @@
 
 #include "neo.h"
 
-int initGraph(graph* g, uint numVerts) {
+int initGraph(graph* g, uint numVerts)
+{
     g->numVerts = numVerts;
 
     g->matrix = malloc(numVerts * sizeof(int*));
@@ -42,20 +43,22 @@ int initGraph(graph* g, uint numVerts) {
     return 0;
 }
 
-int checkGraph(graph g) {
+int checkGraph(graph g)
+{
     if (g.vertices == NULL ||
         g.matrix == NULL ||
         g.numVerts == 0
     ) return -1;
 
-    for (int i = 0; i < g.numVerts; ++i) {
+    for (uint i = 0; i < g.numVerts; ++i) {
         if (g.matrix[i] == NULL) return -1;
     }
 
     return 0;
 }
 
-int setEdge(graph* g, uint from, uint to, int value) {
+int setEdge(graph* g, uint from, uint to, int value)
+{
     if (g == NULL ||
         g->matrix == NULL ||
         g->matrix[from] == NULL
@@ -65,7 +68,8 @@ int setEdge(graph* g, uint from, uint to, int value) {
     return 0;
 }
 
-int setEdgeND(graph* g, int from, int to, int value) {
+int setEdgeND(graph* g, int from, int to, int value)
+{
     if (g == NULL ||
         g->matrix == NULL ||
         g->matrix[from] == NULL
@@ -76,7 +80,8 @@ int setEdgeND(graph* g, int from, int to, int value) {
     return 0;
 }
 
-int renameVertex(graph* g, uint index, const char* newName) {
+int renameVertex(graph* g, uint index, const char* newName)
+{
     if (g == NULL || g->vertices == NULL) return -1;
 
 
@@ -89,7 +94,8 @@ int renameVertex(graph* g, uint index, const char* newName) {
     return 0;
 }
 
-int getVertIndexByName(graph g, const char* searchName) {
+int getVertIndexByName(graph g, const char* searchName)
+{
     for (uint i = 0; i < g.numVerts; ++i) {
         if (g.vertices[i].name != NULL && !strcmp(g.vertices[i].name, searchName)) return i;
     }
@@ -97,12 +103,14 @@ int getVertIndexByName(graph g, const char* searchName) {
     return -1;
 }
 
-char* getVertexName(graph g, uint index) {
+char* getVertexName(graph g, uint index)
+{
     if (index < g.numVerts) return g.vertices[index].name;
     return NULL;
 }
 
-int isDirected(graph g) {
+int isDirected(graph g)
+{
     for (uint i = 0; i < g.numVerts; ++i) {
         for (uint k = 0; k < 1; ++k) {
             if (g.matrix[i][k] != g.matrix[k][i]) return 0;
