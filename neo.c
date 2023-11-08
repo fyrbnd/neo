@@ -112,7 +112,7 @@ char* getVertexName(graph g, uint index)
 int isDirected(graph g)
 {
     for (uint i = 0; i < g.numVerts; ++i) {
-        for (uint k = 0; k < 1; ++k) {
+        for (uint k = 0; k < i; ++k) {
             if (g.matrix[i][k] != g.matrix[k][i]) return 0;
         }
     }
