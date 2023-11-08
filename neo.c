@@ -1,4 +1,4 @@
-/*===------------ neo - Library for Working With Graphs in C ------------===*\
+/*===------------ neo - Library for Working With _graphs in C ------------===*\
 |*                                                                          *|
 |* This file is part of Neo.                                                *|
 |*                                                                          *|
@@ -23,19 +23,19 @@
 
 #include "neo.h"
 
-int initGraph(graph* g, uint numVerts)
+int init_graph(graph* g, uint num_verts)
 {
-    g->numVerts = numVerts;
+    g->num_verts = num_verts;
 
-    g->matrix = malloc(numVerts * sizeof(int*));
-    g->vertices = malloc(numVerts * sizeof(vertex));
+    g->matrix = malloc(num_verts * sizeof(int*));
+    g->vertices = malloc(num_verts * sizeof(vertex));
     if (g->vertices == NULL || g->matrix == NULL) return -1;
 
-    for (uint i = 0; i < numVerts; ++i) {
-        g->matrix[i] = malloc(numVerts * sizeof(int));
+    for (uint i = 0; i < num_verts; ++i) {
+        g->matrix[i] = malloc(num_verts * sizeof(int));
         if (g->matrix[i] == NULL) return -1;
 
-        for (uint k = 0; k < numVerts; ++k) {
+        for (uint k = 0; k < num_verts; ++k) {
             g->matrix[i][k] = i == k ? 0 : -1;
         }
     }
@@ -43,21 +43,21 @@ int initGraph(graph* g, uint numVerts)
     return 0;
 }
 
-int checkGraph(graph g)
+int check_graph(graph g)
 {
     if (g.vertices == NULL ||
         g.matrix == NULL ||
-        g.numVerts == 0
+        g.num_verts == 0
     ) return -1;
 
-    for (uint i = 0; i < g.numVerts; ++i) {
+    for (uint i = 0; i < g.num_verts; ++i) {
         if (g.matrix[i] == NULL) return -1;
     }
 
     return 0;
 }
 
-int setEdge(graph* g, uint from, uint to, int value)
+int set_edge(graph* g, uint from, uint to, int value)
 {
     if (g == NULL ||
         g->matrix == NULL ||
@@ -68,7 +68,7 @@ int setEdge(graph* g, uint from, uint to, int value)
     return 0;
 }
 
-int setEdgeND(graph* g, int from, int to, int value)
+int set_edge_nd(graph* g, int from, int to, int value)
 {
     if (g == NULL ||
         g->matrix == NULL ||
@@ -80,38 +80,38 @@ int setEdgeND(graph* g, int from, int to, int value)
     return 0;
 }
 
-int renameVertex(graph* g, uint index, const char* newName)
+int rename_vertex(graph* g, uint index, const char* new_name)
 {
     if (g == NULL || g->vertices == NULL) return -1;
 
 
     if(g->vertices[index].name != NULL) free(g->vertices[index].name);
 
-    g->vertices[index].name = malloc((strlen(newName) + 1) * sizeof(char));
+    g->vertices[index].name = malloc((strlen(new_name) + 1) * sizeof(char));
     if(g->vertices[index].name == NULL) return -1;
 
-    if (strcpy(g->vertices[index].name, newName) == NULL) return -1;
+    if (strcpy(g->vertices[index].name, new_name) == NULL) return -1;
     return 0;
 }
 
-int getVertIndexByName(graph g, const char* searchName)
+int get_vert_index_by_name(graph g, const char* search_name)
 {
-    for (uint i = 0; i < g.numVerts; ++i) {
-        if (g.vertices[i].name != NULL && !strcmp(g.vertices[i].name, searchName)) return i;
+    for (uint i = 0; i < g.num_verts; ++i) {
+        if (g.vertices[i].name != NULL && !strcmp(g.vertices[i].name, search_name)) return i;
     }
 
     return -1;
 }
 
-char* getVertexName(graph g, uint index)
+char* get_vertex_name(graph g, uint index)
 {
-    if (index < g.numVerts) return g.vertices[index].name;
+    if (index < g.num_verts) return g.vertices[index].name;
     return NULL;
 }
 
-int isDirected(graph g)
+int is_directed(graph g)
 {
-    for (uint i = 0; i < g.numVerts; ++i) {
+    for (uint i = 0; i < g.num_verts; ++i) {
         for (uint k = 0; k < i; ++k) {
             if (g.matrix[i][k] != g.matrix[k][i]) return 0;
         }

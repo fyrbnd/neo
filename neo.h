@@ -1,4 +1,4 @@
-/*===------------ neo - Library for Working With Graphs in C ------------===*\
+/*===------------ neo - Library for Working With _graphs in C ------------===*\
 |*                                                                          *|
 |* This file is part of Neo.                                                *|
 |*                                                                          *|
@@ -30,7 +30,7 @@ typedef struct path path;
 
 
 struct graph {
-    uint numVerts;
+    uint num_verts;
     vertex* vertices;
     int** matrix;
 };
@@ -44,23 +44,23 @@ struct path {
     uint* vertices;
 };
 
-int initGraph(graph* g, uint numVerts);
-int checkGraph(graph g);
+int init_graph(graph* g, uint num_verts);
+int check_graph(graph g);
 
-int setEdge(graph* g, uint from, uint to, int value);
-int setEdgeND(graph* g, int from, int to, int value);
-int renameVertex(graph* g, uint index, const char* newName);
+int set_edge(graph* g, uint from, uint to, int value);
+int set_edge_nd(graph* g, int from, int to, int value);
+int rename_vertex(graph* g, uint index, const char* new_name);
 
-int getVertIndexByName(graph g, const char* name);
-char* getVertexName(graph g, uint index);
+int get_vert_index_by_name(graph g, const char* name);
+char* get_vertex_name(graph g, uint index);
 
-path shortestPath(graph g, uint from, uint to);
-path* allPaths(graph g, uint from, uint to);
+path shortest_path(graph g, uint from, uint to);
+path* all_paths(graph g, uint from, uint to);
 
-int isDirected(graph g);
-/*int isConnected(graph g);
-int isPlanar(graph g);
-int isCyclic(graph g);
-int isChordal(graph g);*/
+int is_directed(graph g);
+/*int is_connected(graph g);
+int is_planar(graph g);
+int is_cyclic(graph g);
+int is_chordal(graph g);*/
 
 #endif /*NEO_GRAPH_H_*/
