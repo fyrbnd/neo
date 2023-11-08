@@ -1,4 +1,4 @@
-/*===------------ neo - Library for Working With _graphs in C ------------===*\
+/*===------------ neo - Library for Working With graphs in C ------------===*\
 |*                                                                          *|
 |* This file is part of Neo.                                                *|
 |*                                                                          *|
