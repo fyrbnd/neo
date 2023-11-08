@@ -84,11 +84,10 @@ int rename_vertex(graph* g, uint index, const char* new_name)
 {
     if (g == NULL || g->vertices == NULL) return -1;
 
-
     if(g->vertices[index].name != NULL) free(g->vertices[index].name);
 
     g->vertices[index].name = malloc((strlen(new_name) + 1) * sizeof(char));
-    if(g->vertices[index].name == NULL) return -1;
+    if(g->vertices[index].name == NULL) return -1; /*this should never happen but who knows*/
 
     if (strcpy(g->vertices[index].name, new_name) == NULL) return -1;
     return 0;
@@ -101,12 +100,6 @@ int get_vert_index_by_name(graph g, const char* search_name)
     }
 
     return -1;
-}
-
-char* get_vertex_name(graph g, uint index)
-{
-    if (index < g.num_verts) return g.vertices[index].name;
-    return NULL;
 }
 
 int is_directed(graph g)

@@ -40,7 +40,7 @@ void print_vertices(FILE* stream, graph graph, const char* prefix)
 {
     for (uint i = 0; i < graph.num_verts; ++i) {
         /*fprintf(stream, "%svertex %-2i: %s\n", prefix, i, graph.vertices[i].name);*/
-        fprintf(stream, "%svertex %*d: %s\n", prefix, dec_len(graph.num_verts), i, get_vertex_name(graph, i));
+        fprintf(stream, "%svertex %*d: %s\n", prefix, dec_len(graph.num_verts), i, graph.vertices[i].name);
     }
 }
 

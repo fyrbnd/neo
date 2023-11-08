@@ -52,10 +52,9 @@ int set_edge_nd(graph* g, int from, int to, int value);
 int rename_vertex(graph* g, uint index, const char* new_name);
 
 int get_vert_index_by_name(graph g, const char* name);
-char* get_vertex_name(graph g, uint index);
 
-path shortest_path(graph g, uint from, uint to);
-path* all_paths(graph g, uint from, uint to);
+path shortest_path(graph g, uint from, uint to); /*TODO*/
+path* all_paths(graph g, uint from, uint to); /*TODO*/
 
 int is_directed(graph g);
 /*int is_connected(graph g);
