@@ -1,6 +1,6 @@
 # neo
 
-Library for working with graphs in C. Work in progress.
+Library for working with graphs in C. Work in progress. Most basics are done, but a couple planned functions are missing.
 
 ## goals
 
@@ -15,3 +15,8 @@ No makefile as of now, so:
 * ```c
   #include "neo.h"
   ```
+## bugs
+
+* will probably break on Microsoft Windows due to strange character management on OS level (WONTFIX)
+
+Open an issue if you find something else!
