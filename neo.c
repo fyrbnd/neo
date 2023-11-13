@@ -57,6 +57,22 @@ int check_graph(graph_t g)
     return 0;
 }
 
+int delete_graph(graph_t* g) {
+    if (g == NULL || g->num_verts == 0) return -1;
+
+    for (uint i = 0; i < g->num_verts; ++i) {
+        free(g->matrix[i]);
+
+        if (g->vertices[i].name != NULL) free(g->vertices[i].name);
+    }
+
+    free(g->matrix);
+    free(g->vertices);
+    free(g);
+
+    return 0;
+}
+
 int set_edge(graph_t* g, uint from, uint to, int value)
 {
     if (g == NULL ||

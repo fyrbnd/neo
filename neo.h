@@ -39,16 +39,19 @@ struct vertex {
     char* name;
 };
 
-struct path {
+/*struct path {
     uint length;
     uint* vertices;
-};
+};*/
 
 /* initialize graph 'g' with 'n' vertices */
 int init_graph(graph_t* g, uint n);
 
 /* check if graph 'g' is valid */
 int check_graph(graph_t g);
+
+/* fully delete graph 'g' */
+int delete_graph(graph_t* g);
 
 /* set the edge between nodes 'from' and 'to' to 'value' */
 int set_edge(graph_t* g, uint from, uint to, int value);
