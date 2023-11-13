@@ -44,22 +44,37 @@ struct path {
     uint* vertices;
 };
 
-int init_graph(graph_t* g, uint num_verts);
+/* initialize graph 'g' with 'n' vertices */
+int init_graph(graph_t* g, uint n);
+
+/* check if graph 'g' is valid */
 int check_graph(graph_t g);
 
+/* set the edge between nodes 'from' and 'to' to 'value' */
 int set_edge(graph_t* g, uint from, uint to, int value);
-int set_edge_nd(graph_t* g, int from, int to, int value);
-int rename_vertex(graph_t* g, uint index, const char* new_name);
 
+/* set the edge between nodes 'from' and 'to' to 'value' in both directions */
+int set_edge_nd(graph_t* g, int from, int to, int value);
+
+/* set the name of node 'index' to 'name_new' */
+int rename_vertex(graph_t* g, uint index, const char* name_new);
+
+/* sets the size of graph 'g' to 'size_new' */
+int change_graph_size(graph_t* g, uint size_new);
+
+/* return the index of the first node with the name 'search_name' */
 int get_vert_index_by_name(graph_t g, const char* name);
 
-path_t shortest_path(graph_t g, uint from, uint to); /*TODO*/
-path_t* all_paths(graph_t g, uint from, uint to); /*TODO*/
 
+/* returns 1 if 'g' is a directed graph */
 int is_directed(graph_t g);
-/*int is_connected(graph g);
-int is_planar(graph g);
-int is_cyclic(graph g);
-int is_chordal(graph g);*/
+
+
+/*path_t shortest_path(graph_t g, uint from, uint to); TODO*/
+/*path_t* all_paths(graph_t g, uint from, uint to); TODO*/
+/*int is_connected(graph g); TODO*/
+/*int is_planar(graph g); TODO*/
+/*int is_cyclic(graph g); TODO*/
+/*int is_chordal(graph g); TODO*/
 
 #endif /*NEO_GRAPH_H_*/

@@ -23,19 +23,19 @@
 
 #include "neo.h"
 
-int init_graph(graph_t* g, uint num_verts)
+int init_graph(graph_t* g, uint n)
 {
-    g->num_verts = num_verts;
+    g->num_verts = n;
 
-    g->matrix = malloc(num_verts * sizeof(int*));
-    g->vertices = malloc(num_verts * sizeof(vertex_t));
+    g->matrix = malloc(n * sizeof(int*));
+    g->vertices = malloc(n * sizeof(vertex_t));
     if (g->vertices == NULL || g->matrix == NULL) return -1;
 
-    for (uint i = 0; i < num_verts; ++i) {
-        g->matrix[i] = malloc(num_verts * sizeof(int));
+    for (uint i = 0; i < n; ++i) {
+        g->matrix[i] = malloc(n * sizeof(int));
         if (g->matrix[i] == NULL) return -1;
 
-        for (uint k = 0; k < num_verts; ++k) {
+        for (uint k = 0; k < n; ++k) {
             g->matrix[i][k] = i == k ? 0 : -1;
         }
     }
@@ -80,16 +80,16 @@ int set_edge_nd(graph_t* g, int from, int to, int value)
     return 0;
 }
 
-int rename_vertex(graph_t* g, uint index, const char* new_name)
+int rename_vertex(graph_t* g, uint index, const char* name_new)
 {
     if (g == NULL || g->vertices == NULL) return -1;
 
     if(g->vertices[index].name != NULL) free(g->vertices[index].name);
 
-    g->vertices[index].name = malloc((strlen(new_name) + 1) * sizeof(char));
+    g->vertices[index].name = malloc((strlen(name_new) + 1) * sizeof(char));
     if(g->vertices[index].name == NULL) return -1; /*this should never happen but who knows*/
 
-    if (strcpy(g->vertices[index].name, new_name) == NULL) return -1;
+    if (strcpy(g->vertices[index].name, name_new) == NULL) return -1;
     return 0;
 }
 
