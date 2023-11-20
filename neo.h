@@ -62,8 +62,8 @@ int set_edge_nd(graph_t* g, int from, int to, int value);
 /* set the name of node 'index' to 'name_new' */
 int rename_vertex(graph_t* g, uint index, const char* name_new);
 
-/* sets the size of graph 'g' to 'size_new' */
-int change_graph_size(graph_t* g, uint size_new);
+/* add a new vertex to the graph 'g', return its id */
+int add_vertex(graph_t* g);
 
 /* return the index of the first node with the name 'search_name' */
 int get_vert_index_by_name(graph_t g, const char* name);

@@ -57,13 +57,13 @@ int check_graph(graph_t g)
     return 0;
 }
 
-int delete_graph(graph_t* g) {
+int delete_graph(graph_t* g)
+{
     if (g == NULL || g->num_verts == 0) return -1;
 
     for (uint i = 0; i < g->num_verts; ++i) {
         free(g->matrix[i]);
-
-        if (g->vertices[i].name != NULL) free(g->vertices[i].name);
+        free(g->vertices[i].name);
     }
 
     free(g->matrix);
@@ -94,6 +94,34 @@ int set_edge_nd(graph_t* g, int from, int to, int value)
     g->matrix[from][to] = value;
     g->matrix[to][from] = value;
     return 0;
+}
+
+int add_vertex(graph_t* g)
+{
+    if (g == NULL ||
+        g->matrix == NULL ||
+        g->vertices == NULL
+    ) return -1;
+
+    for (uint i = 0; i < g->num_verts; ++i) if (g->matrix[i] == NULL) return -1;
+
+    uint id = g->num_verts++;
+
+    g->vertices = realloc(g->vertices, g->num_verts * sizeof(vertex_t));
+    g->matrix = realloc(g->matrix, g->num_verts * sizeof(int*));
+    if (g->matrix == NULL || g->vertices == NULL) return -1;
+
+    for (uint i = 0; i < g->num_verts; ++i) {
+        g->matrix[i] = realloc(g->matrix[i], g->num_verts * sizeof(int));
+        if (g->matrix[i] == NULL) return -1;
+
+        g->matrix[i][id] = -1;
+        g->matrix[id][i] = -1;
+    }
+
+    g->matrix[id][id] = 0;
+
+    return id;
 }
 
 int rename_vertex(graph_t* g, uint index, const char* name_new)
