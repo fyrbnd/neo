@@ -44,28 +44,28 @@ struct vertex {
     uint* vertices;
 };*/
 
-/* initialize graph 'g' with 'n' vertices */
+/* initializes graph 'g' with 'n' vertices */
 int init_graph(graph_t* g, uint n);
 
-/* check if graph 'g' is valid */
+/* checks if graph 'g' is valid */
 int check_graph(graph_t g);
 
-/* fully delete graph 'g' */
+/* fully deletes graph 'g' */
 int delete_graph(graph_t* g);
 
-/* set the edge between nodes 'from' and 'to' to 'value' */
+/* sets the edge between nodes 'from' and 'to' to 'value' */
 int set_edge(graph_t* g, uint from, uint to, int value);
 
-/* set the edge between nodes 'from' and 'to' to 'value' in both directions */
+/* sets the edge between nodes 'from' and 'to' to 'value' in both directions */
 int set_edge_nd(graph_t* g, int from, int to, int value);
 
-/* set the name of node 'index' to 'name_new' */
+/* sets the name of node 'index' to 'name_new' */
 int rename_vertex(graph_t* g, uint index, const char* name_new);
 
-/* add a new vertex to the graph 'g', return its id */
+/* add a new vertex to the graph 'g'. returns -1 on failure, otherwise returns id of created vertex */
 int add_vertex(graph_t* g);
 
-/* return the index of the first node with the name 'search_name' */
+/* returns the index of the first node with the name 'search_name' */
 int get_vert_index_by_name(graph_t g, const char* name);
 
 
