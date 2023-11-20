@@ -68,16 +68,7 @@ int add_vertex(graph_t* g);
 /* returns the index of the first node with the name 'search_name' */
 int get_vert_index_by_name(graph_t g, const char* name);
 
-
 /* returns 1 if 'g' is a directed graph */
 int is_directed(graph_t g);
-
-
-/*path_t shortest_path(graph_t g, uint from, uint to); TODO*/
-/*path_t* all_paths(graph_t g, uint from, uint to); TODO*/
-/*int is_connected(graph g); TODO*/
-/*int is_planar(graph g); TODO*/
-/*int is_cyclic(graph g); TODO*/
-/*int is_chordal(graph g); TODO*/
 
 #endif /*NEO_GRAPH_H_*/
