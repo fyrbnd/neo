@@ -3,10 +3,6 @@
 
 /*Random non-useless program used for testing our library.*/
 
-typedef unsigned char uchar;
-typedef unsigned int uint;
-typedef unsigned long ulong;
-
 uint dec_len(int n)
 {
     if (!(n / 10)) return n < 0 ? 2 : 1;
@@ -36,7 +32,6 @@ void print_matrix(FILE* stream, graph_t graph, const char* prefix)
 }
 
 void print_vertices(FILE* stream, graph_t graph, const char* prefix)
-
 {
     for (uint i = 0; i < graph.num_verts; ++i) {
         /*fprintf(stream, "%svertex %-2i: %s\n", prefix, i, graph.vertices[i].name);*/
