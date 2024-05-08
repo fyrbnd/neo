@@ -6,6 +6,7 @@ Library for working with graphs in C. Work in progress. Most basics are done, bu
 
 * making your life easier if you want to quickly write code that relies on the abstract idea of a graph
 * proving to our CS teacher in school that Java is BS
+* run on common modern UNIX systems (e.g. GNU/Linux, BSD, macOS, ...)
 
 ## use
 
